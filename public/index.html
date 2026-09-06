@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Anil Kumar Cherukuri · Platform Lead · Prime Finance Engineering</title>
+<meta name="description" content="Anil Kumar Cherukuri — Platform Lead at Citi. 16+ years building prime finance, securities lending and post-trade platforms with Java, Angular, AWS and agentic AI tooling.">
+<meta property="og:title" content="Anil Kumar Cherukuri · Platform Lead · Prime Finance Engineering">
+<meta property="og:description" content="Prime finance platforms, cloud-native engineering and AI-native delivery for capital markets.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #070A12;
+    --bg-2: #0D1220;
+    --panel: #10172A;
+    --panel-2: #151D33;
+    --line: #1F2A44;
+    --line-2: #2A3859;
+    --text: #E6EBF5;
+    --text-2: #A7B1C7;
+    --muted: #6F7A93;
+    --accent: #4CC9F0;
+    --accent-2: #7B61FF;
+    --accent-3: #34D399;
+    --sans: "Space Grotesk", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+    --max: 1200px;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { animation-duration: 0.001s !important; transition-duration: 0.001s !important; }
+  }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  body::before {
+    content: "";
+    position: fixed; inset: 0;
+    background:
+      radial-gradient(900px 500px at 15% -10%, rgba(76,201,240,.12), transparent 60%),
+      radial-gradient(800px 500px at 90% 10%, rgba(123,97,255,.12), transparent 60%);
+    pointer-events: none;
+    z-index: 0;
+  }
+  body::after {
+    content: "";
+    position: fixed; inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+    background-size: 48px 48px;
+    mask-image: radial-gradient(ellipse at 50% 0%, #000 20%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+  a { color: inherit; text-decoration: none; }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+  .wrap { position: relative; z-index: 1; max-width: var(--max); margin: 0 auto; padding: 0 28px; }
+  .mono { font-family: var(--mono); }
+  .tag {
+    font-family: var(--mono); font-size: 12px; letter-spacing: .12em; text-transform: uppercase;
+    color: var(--accent);
+  }
+  .tag::before { content: "[ "; color: var(--muted); }
+  .tag::after  { content: " ]"; color: var(--muted); }
+
+  /* ---------- nav ---------- */
+  .nav {
+    position: sticky; top: 0; z-index: 20;
+    backdrop-filter: blur(14px);
+    background: rgba(7,10,18,.72);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+  .logo { font-family: var(--mono); font-weight: 500; font-size: 18px; letter-spacing: .04em; }
+  .logo span { color: var(--accent); }
+  .links { display: flex; gap: 28px; font-size: 14px; color: var(--text-2); }
+  .links a:hover { color: var(--text); }
+  .links .cta {
+    color: var(--bg); background: var(--accent); padding: 7px 14px; border-radius: 6px; font-weight: 600;
+  }
+  .links .cta:hover { color: var(--bg); filter: brightness(1.1); }
+  .burger { display: none; background: none; border: 1px solid var(--line-2); color: var(--text); border-radius: 6px; padding: 6px 10px; font-family: var(--mono); font-size: 12px; cursor: pointer; }
+
+  /* ---------- hero ---------- */
+  .hero { padding: 96px 0 72px; }
+  .hero .wrap { display: grid; grid-template-columns: 1fr 1.35fr; gap: 56px; align-items: center; }
+  .avatar {
+    width: 100%; max-width: 380px; aspect-ratio: 1; margin: 0 auto;
+    border-radius: 24px;
+    background: linear-gradient(135deg, var(--panel-2), var(--panel));
+    border: 1px solid var(--line-2);
+    display: grid; place-items: center;
+    position: relative; overflow: hidden;
+  }
+  .avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .avatar .initials {
+    font-family: var(--mono); font-size: 80px; font-weight: 500; letter-spacing: -.04em;
+    background: linear-gradient(120deg, var(--accent), var(--accent-2));
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .avatar::after {
+    content: ""; position: absolute; inset: 0;
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,.04), 0 30px 80px rgba(76,201,240,.08);
+    border-radius: 24px; pointer-events: none;
+  }
+  .hero h1 { font-size: clamp(40px, 5.6vw, 66px); line-height: 1; letter-spacing: -.03em; margin: 14px 0 12px; font-weight: 700; }
+  .hero .sub { color: var(--text-2); font-size: 18px; margin: 0 0 30px; }
+  .hero .sub b { color: var(--text); font-weight: 500; }
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 30px; }
+  .stat { border: 1px solid var(--line); background: rgba(16,23,42,.6); border-radius: 12px; padding: 14px 16px; }
+  .stat .n { font-family: var(--mono); font-size: 28px; font-weight: 500; color: var(--text); line-height: 1.1; }
+  .stat .n em { font-style: normal; color: var(--accent); }
+  .stat .l { font-size: 12px; color: var(--muted); margin-top: 4px; }
+  .typed { font-family: var(--mono); font-size: 15px; color: var(--accent); min-height: 24px; margin-bottom: 26px; }
+  .typed .cursor { display: inline-block; width: 9px; height: 1.1em; background: var(--accent); vertical-align: text-bottom; margin-left: 3px; animation: blink 1s steps(1) infinite; }
+  @keyframes blink { 50% { opacity: 0; } }
+  .btns { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 34px; }
+  .btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 20px; border-radius: 8px; font-weight: 600; font-size: 15px; border: 1px solid var(--line-2); transition: transform .15s, border-color .15s, background .15s; }
+  .btn:hover { transform: translateY(-1px); border-color: var(--accent); }
+  .btn.primary { background: var(--accent); color: var(--bg); border-color: var(--accent); }
+  .btn.ghost { background: transparent; color: var(--text); }
+  .coords { font-family: var(--mono); font-size: 12px; color: var(--muted); letter-spacing: .06em; }
+  .coords span { color: var(--text-2); }
+
+  /* ---------- sections ---------- */
+  section { padding: 88px 0; border-top: 1px solid var(--line); }
+  .sec-head { max-width: 720px; margin-bottom: 40px; }
+  .sec-head h2 { font-size: clamp(30px, 3.6vw, 44px); line-height: 1.1; letter-spacing: -.02em; margin: 12px 0 14px; }
+  .sec-head p { color: var(--text-2); margin: 0; font-size: 17px; }
+
+  /* pillars */
+  .pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .pillar {
+    background: linear-gradient(180deg, var(--panel), var(--bg-2));
+    border: 1px solid var(--line); border-radius: 16px; padding: 26px;
+    display: flex; flex-direction: column; gap: 14px;
+    transition: border-color .2s, transform .2s;
+  }
+  .pillar:hover { border-color: var(--line-2); transform: translateY(-3px); }
+  .pillar .code { font-family: var(--mono); font-size: 12px; color: var(--accent); }
+  .pillar h3 { margin: 0; font-size: 22px; line-height: 1.2; }
+  .pillar p { margin: 0; color: var(--text-2); font-size: 15px; }
+  .pillar ul { margin: 6px 0 0; padding: 0; list-style: none; color: var(--text-2); font-size: 14px; }
+  .pillar li { padding: 7px 0; border-top: 1px solid var(--line); }
+  .pillar li::before { content: "▸ "; color: var(--accent-2); }
+  .pillar .more { margin-top: auto; padding-top: 12px; font-family: var(--mono); font-size: 12px; color: var(--accent); }
+
+  /* capability graph */
+  .graph-wrap { display: grid; grid-template-columns: 1.1fr .9fr; gap: 32px; align-items: start; }
+  .graph-box { background: var(--panel); border: 1px solid var(--line); border-radius: 16px; padding: 18px; }
+  .graph-box svg { width: 100%; height: auto; display: block; }
+  .graph-meta { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 22px; }
+  .graph-meta div { border: 1px solid var(--line); border-radius: 12px; padding: 14px; background: rgba(16,23,42,.6); }
+  .graph-meta .n { font-family: var(--mono); font-size: 26px; color: var(--accent); }
+  .graph-meta .l { font-family: var(--mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
+  .chip { font-family: var(--mono); font-size: 12px; padding: 6px 10px; border-radius: 999px; border: 1px solid var(--line-2); color: var(--text-2); cursor: pointer; background: transparent; transition: .15s; }
+  .chip.on, .chip:hover { border-color: var(--accent); color: var(--accent); }
+  .cap-list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 6px 16px; font-size: 14px; color: var(--text-2); }
+  .cap-list li { padding: 6px 0; border-bottom: 1px solid var(--line); }
+  .cap-list li.dim { opacity: .3; }
+  .node { transition: opacity .2s; cursor: pointer; }
+  .node.dim { opacity: .18; }
+  .edge { stroke: var(--line-2); stroke-width: 1; transition: opacity .2s; }
+  .edge.dim { opacity: .12; }
+
+  /* timeline */
+  .tl { display: grid; gap: 16px; }
+  .job {
+    display: grid; grid-template-columns: 170px 1fr; gap: 24px;
+    background: var(--panel); border: 1px solid var(--line); border-radius: 16px; padding: 26px;
+  }
+  .job .when { font-family: var(--mono); font-size: 13px; color: var(--accent); }
+  .job .when small { display: block; color: var(--muted); margin-top: 6px; font-size: 12px; }
+  .job h3 { margin: 0 0 2px; font-size: 21px; }
+  .job .org { color: var(--text-2); font-size: 15px; margin: 0 0 14px; }
+  .job ul { margin: 0; padding-left: 18px; color: var(--text-2); font-size: 15px; }
+  .job li { margin-bottom: 8px; }
+  .job li::marker { color: var(--accent-2); }
+  .badge { display: inline-block; margin-top: 12px; font-family: var(--mono); font-size: 12px; color: var(--accent-3); border: 1px solid rgba(52,211,153,.35); padding: 5px 10px; border-radius: 6px; }
+
+  /* modules */
+  .modules { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+  .mod { background: var(--bg-2); border: 1px solid var(--line); border-radius: 14px; padding: 20px; min-height: 170px; display: flex; flex-direction: column; transition: border-color .2s; }
+  .mod:hover { border-color: var(--accent); }
+  .mod .k { font-family: var(--mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+  .mod h4 { margin: 10px 0 6px; font-size: 18px; line-height: 1.2; }
+  .mod p { margin: 0; color: var(--text-2); font-size: 14px; }
+  .mod .sym { margin-top: auto; padding-top: 14px; color: var(--accent-2); font-family: var(--mono); font-size: 18px; }
+
+  /* contact */
+  .contact-box { background: linear-gradient(135deg, rgba(76,201,240,.10), rgba(123,97,255,.10)); border: 1px solid var(--line-2); border-radius: 20px; padding: 44px; display: grid; grid-template-columns: 1.2fr 1fr; gap: 32px; align-items: center; }
+  .contact-box h2 { margin: 10px 0 10px; font-size: clamp(28px, 3.4vw, 40px); letter-spacing: -.02em; }
+  .contact-box p { margin: 0; color: var(--text-2); }
+  .contact-list { display: grid; gap: 10px; font-family: var(--mono); font-size: 14px; }
+  .contact-list a { display: flex; justify-content: space-between; gap: 12px; padding: 12px 14px; border: 1px solid var(--line-2); border-radius: 10px; background: rgba(7,10,18,.5); }
+  .contact-list a:hover { border-color: var(--accent); }
+  .contact-list a span:last-child { color: var(--muted); }
+
+  /* footer */
+  footer { border-top: 1px solid var(--line); padding: 56px 0 40px; color: var(--text-2); font-size: 14px; }
+  .fgrid { display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr; gap: 32px; }
+  .fgrid h5 { margin: 0 0 12px; color: var(--text); font-size: 14px; font-weight: 600; }
+  .fgrid ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+  .fgrid a:hover { color: var(--accent); }
+  .fbottom { margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--line); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; font-family: var(--mono); font-size: 12px; color: var(--muted); }
+
+  /* ---------- responsive ---------- */
+  @media (max-width: 1000px) {
+    .hero .wrap { grid-template-columns: 1fr; text-align: left; }
+    .avatar { max-width: 220px; margin: 0; }
+    .pillars, .modules { grid-template-columns: 1fr 1fr; }
+    .graph-wrap { grid-template-columns: 1fr; }
+    .fgrid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 700px) {
+    .links { display: none; position: absolute; top: 64px; left: 0; right: 0; flex-direction: column; gap: 0; background: var(--bg-2); border-bottom: 1px solid var(--line); padding: 8px 28px 16px; }
+    .links.open { display: flex; }
+    .links a { padding: 10px 0; }
+    .links .cta { align-self: flex-start; margin-top: 8px; }
+    .burger { display: block; }
+    .hero { padding: 56px 0 48px; }
+    .stats { grid-template-columns: 1fr 1fr; }
+    .pillars, .modules, .cap-list { grid-template-columns: 1fr; }
+    .job { grid-template-columns: 1fr; gap: 10px; padding: 20px; }
+    .contact-box { grid-template-columns: 1fr; padding: 28px; }
+    .fgrid { grid-template-columns: 1fr; }
+    section { padding: 64px 0; }
+  }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="logo" href="#top">AKC<span>_</span></a>
+    <button class="burger" aria-label="Toggle menu" aria-expanded="false">MENU</button>
+    <nav class="links" aria-label="Primary">
+      <a href="#about">About</a>
+      <a href="#expertise">Expertise</a>
+      <a href="#graph">Capability Graph</a>
+      <a href="#experience">Experience</a>
+      <a href="#credentials">Credentials</a>
+      <a class="cta" href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero" id="about" style="border-top:0">
+    <div class="wrap">
+      <div class="avatar" aria-hidden="true">
+        <img src="/anil-kumar-cherukuri.jpg" alt="" onerror="this.remove()">
+        <div class="initials">AKC</div>
+      </div>
+      <div>
+        <div class="tag">Portfolio</div>
+        <h1>Anil Kumar Cherukuri</h1>
+        <p class="sub">Prime Finance · Platform Engineering · <b>AI-Native Delivery</b></p>
+
+        <div class="stats" aria-label="Career at a glance">
+          <div class="stat"><div class="n"><em>16</em>+</div><div class="l">Years engineering</div></div>
+          <div class="stat"><div class="n"><em>9</em>+</div><div class="l">Years leading teams</div></div>
+          <div class="stat"><div class="n"><em>90</em>%+</div><div class="l">Test coverage delivered</div></div>
+          <div class="stat"><div class="n">E<em>3</em></div><div class="l">Citi Engineering Excellence</div></div>
+        </div>
+
+        <div class="typed" aria-live="polite"><span id="typed">Platform Lead, Prime Brokerage</span><span class="cursor"></span></div>
+
+        <div class="btns">
+          <a class="btn primary" href="https://www.linkedin.com/in/anil-cherukuri-78191a22b/" target="_blank" rel="noopener">Connect on LinkedIn</a>
+          <a class="btn ghost" href="#expertise">Explore</a>
+        </div>
+
+        <div class="coords">40.7178° N, 74.0431° W &nbsp;·&nbsp; <span>JERSEY CITY, NJ</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="expertise">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="tag">What I build</div>
+        <h2>Platforms for the people who move money and securities.</h2>
+        <p>Sixteen years across Citi, Fidelity and Thomson Reuters, building the portals, pipelines and post-trade systems behind prime brokerage — and now putting agentic AI to work inside the engineering process itself.</p>
+      </div>
+      <div class="pillars">
+        <article class="pillar">
+          <div class="code">01 / PLATFORM</div>
+          <h3>Prime Finance Platforms</h3>
+          <p>End-to-end trading and post-trade portals for internal desks and external clients.</p>
+          <ul>
+            <li>Prime Finance Portal &amp; reporting</li>
+            <li>Securities lending / Stock Loan</li>
+            <li>Wire transfer &amp; trade settlement</li>
+            <li>Asset servicing &amp; corporate actions</li>
+            <li>Margin, reference &amp; market data</li>
+          </ul>
+          <a class="more" href="#experience">See the work →</a>
+        </article>
+        <article class="pillar">
+          <div class="code">02 / CLOUD</div>
+          <h3>Cloud-Native Engineering</h3>
+          <p>Resilient microservice systems that meet regulatory and compliance standards.</p>
+          <ul>
+            <li>Java · Spring Boot · Kafka · REST</li>
+            <li>Angular · TypeScript · React · Node.js</li>
+            <li>AWS: S3, EC2, Lambda, API Gateway</li>
+            <li>OpenShift · ECS · Lightspeed migrations</li>
+            <li>Jenkins · uDeploy · ELK · CyberArk</li>
+          </ul>
+          <a class="more" href="#graph">Capability graph →</a>
+        </article>
+        <article class="pillar">
+          <div class="code">03 / AI</div>
+          <h3>AI-Native Delivery</h3>
+          <p>Agentic tooling embedded into enterprise engineering workflows.</p>
+          <ul>
+            <li>Agentic PR review (Delphyne rules)</li>
+            <li>Document intelligence (Stylus Workspaces)</li>
+            <li>Delegated engineering with Devin AI</li>
+            <li>Test generation &amp; legacy modernization</li>
+            <li>Developer-led testing culture</li>
+          </ul>
+          <a class="more" href="#experience">How it's used →</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="graph">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="tag">Interactive explorer</div>
+        <h2>The Capability Graph</h2>
+        <p>Five domains, thirty capabilities. Hover or tap a domain to see what sits underneath it.</p>
+      </div>
+      <div class="graph-wrap">
+        <div class="graph-box">
+          <svg viewBox="0 0 640 420" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Capability graph of five engineering domains">
+            <g id="edges"></g>
+            <g id="nodes"></g>
+          </svg>
+        </div>
+        <div>
+          <div class="graph-meta">
+            <div><div class="n">5</div><div class="l">Domains</div></div>
+            <div><div class="n">30</div><div class="l">Capabilities</div></div>
+            <div><div class="n">Tier-1</div><div class="l">Scale</div></div>
+          </div>
+          <div class="chips" id="chips"></div>
+          <ul class="cap-list" id="caps"></ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="experience">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="tag">Experience</div>
+        <h2>Nineteen years in capital markets engineering.</h2>
+      </div>
+      <div class="tl">
+        <article class="job">
+          <div class="when">2022 — Present<small>Jersey City, NJ</small></div>
+          <div>
+            <h3>Platform Lead, Prime Brokerage</h3>
+            <p class="org">Citi</p>
+            <ul>
+              <li>Delivered the next-generation Prime Finance Portal and reporting platform for Equities, Fixed Income and Stock Loan, with real-time publishing to the Client Stock Ledger and data warehouse.</li>
+              <li>Partnered with product, QA and production support to define, prototype and ship features across Margin Finance, Reference Data and Market Data.</li>
+              <li>Built CI/CD pipelines with Jenkins and uDeploy across Wire Transfer, Asset Servicing/Corporate Actions and Trade Settlements platforms.</li>
+              <li>Championed developer-led testing with Cypress, Jest, Karma, Jasmine, JUnit and H2DB.</li>
+              <li>Automated document summarization, Q&amp;A and multi-document comparison with Citi Stylus Workspaces; configured Delphyne AI PR review with project-specific rules; delegated test generation and legacy modernization to Devin AI.</li>
+            </ul>
+          </div>
+        </article>
+        <article class="job">
+          <div class="when">2016 — 2022<small>Jersey City, NJ</small></div>
+          <div>
+            <h3>Application Lead, Prime Brokerage</h3>
+            <p class="org">Citi</p>
+            <ul>
+              <li>Directed development teams and designed Prime Portal UIs for middle office and external clients with Angular, Node.js, Spring, Java EE, SQL Server, MongoDB and microservices.</li>
+              <li>Led proofs of concept for trade risk detection using quant models.</li>
+              <li>Drove TDD to 90%+ coverage; spearheaded ECS, cloud and Lightspeed migrations for more than half of the platform's projects with ELK, CyberArk and S3.</li>
+            </ul>
+            <span class="badge">Citi Engineering Excellence (E3) award</span>
+          </div>
+        </article>
+        <article class="job">
+          <div class="when">2008 — 2016</div>
+          <div>
+            <h3>Senior Developer</h3>
+            <p class="org">Fidelity Investments</p>
+            <ul>
+              <li>Designed a generic entitlement system adopted across internal groups, including the 10b5-1 system, with an AngularJS UI.</li>
+              <li>Lead architect for the Locates integration on ActiveMQ and event-driven architecture.</li>
+              <li>Cut deployment time 25% with Jython automation; coordinated offshore teams through MQ and Linux migrations; built portal usage analytics.</li>
+            </ul>
+          </div>
+        </article>
+        <article class="job">
+          <div class="when">2007 — 2008</div>
+          <div>
+            <h3>Software Developer</h3>
+            <p class="org">Thomson Reuters</p>
+            <ul>
+              <li>Reduced average wire turnaround from three hours to one by streamlining client, account manager, operations and margin workflows.</li>
+              <li>Built online wire processing with standing instructions, multi-level approvals, account-restriction checks, audit messaging and cutoff enforcement.</li>
+            </ul>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="credentials">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="tag">System assembly</div>
+        <h2>Credentials &amp; foundations</h2>
+      </div>
+      <div class="modules">
+        <div class="mod"><div class="k">Education</div><h4>M.S. Computer Science</h4><p>University of Texas at Tyler</p><div class="sym">◎</div></div>
+        <div class="mod"><div class="k">Education</div><h4>B.S. Computer Science</h4><p>University of Madras</p><div class="sym">◇</div></div>
+        <div class="mod"><div class="k">Certification</div><h4>AWS Certified</h4><p>Cloud architecture and services</p><div class="sym">△</div></div>
+        <div class="mod"><div class="k">Certification</div><h4>Java Certified</h4><p>Enterprise Java platform</p><div class="sym">▽</div></div>
+        <div class="mod"><div class="k">Recognition</div><h4>Citi E3 Alumni</h4><p>Citi-wide Engineering Excellence award for innovation and leadership</p><div class="sym">⬡</div></div>
+        <div class="mod"><div class="k">Domain</div><h4>Securities Finance</h4><p>Clearing, settlement and securities lending within capital markets</p><div class="sym">◈</div></div>
+        <div class="mod"><div class="k">Leadership</div><h4>Global Teams</h4><p>Nine years directing distributed, cross-functional engineering teams</p><div class="sym">◆</div></div>
+        <div class="mod"><div class="k">AI tooling</div><h4>Citi AI Stack</h4><p>Stylus Workspaces, Citi Squad, Devin AI, Delphyne</p><div class="sym">✦</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="wrap">
+      <div class="contact-box">
+        <div>
+          <div class="tag">Contact</div>
+          <h2>Let's talk platforms, prime finance or AI-native engineering.</h2>
+          <p>Open to conversations about platform leadership, capital-markets architecture and applying agentic AI in regulated environments.</p>
+        </div>
+        <div class="contact-list">
+          <a href="https://www.linkedin.com/in/anil-cherukuri-78191a22b/" target="_blank" rel="noopener"><span>LinkedIn</span><span>/in/anil-cherukuri-78191a22b</span></a>
+          <a href="mailto:anil.cherukuri@citi.com"><span>Email</span><span>anil.cherukuri@citi.com</span></a>
+          <a href="tel:+17328812199"><span>Phone</span><span>732-881-2199</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="fgrid">
+      <div>
+        <div class="logo">AKC<span>_</span></div>
+        <p style="margin:12px 0 0;max-width:40ch">Platform Lead at Citi. Prime finance, securities lending and post-trade platforms built on Java, Angular, AWS and agentic AI tooling.</p>
+      </div>
+      <div>
+        <h5>Navigate</h5>
+        <ul><li><a href="#about">About</a></li><li><a href="#expertise">Expertise</a></li><li><a href="#graph">Capability Graph</a></li><li><a href="#experience">Experience</a></li><li><a href="#credentials">Credentials</a></li></ul>
+      </div>
+      <div>
+        <h5>Domains</h5>
+        <ul><li>Prime Finance</li><li>Securities Lending</li><li>Clearing &amp; Settlement</li><li>Wire Transfer</li><li>Corporate Actions</li></ul>
+      </div>
+      <div>
+        <h5>Connect</h5>
+        <ul><li><a href="https://www.linkedin.com/in/anil-cherukuri-78191a22b/" target="_blank" rel="noopener">LinkedIn</a></li><li><a href="mailto:anil.cherukuri@citi.com">Email</a></li><li><a href="tel:+17328812199">Phone</a></li></ul>
+      </div>
+    </div>
+    <div class="fbottom">
+      <span>© <span id="yr"></span> Anil Kumar Cherukuri. All rights reserved.</span>
+      <span>Jersey City, NJ · 40.7178° N, 74.0431° W</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  document.getElementById('yr').textContent = new Date().getFullYear();
+
+  // mobile menu
+  var burger = document.querySelector('.burger'), links = document.querySelector('.links');
+  burger.addEventListener('click', function () {
+    var open = links.classList.toggle('open');
+    burger.setAttribute('aria-expanded', open);
+  });
+  links.addEventListener('click', function (e) { if (e.target.tagName === 'A') links.classList.remove('open'); });
+
+  // typewriter
+  var roles = ['Platform Lead, Prime Brokerage', 'Capital Markets Engineer', 'Cloud-Native Architect', 'AI-Native Engineering Leader'];
+  var el = document.getElementById('typed'), ri = 0, ci = roles[0].length, del = true;
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function tick() {
+    var r = roles[ri];
+    if (del) { ci--; if (ci <= 0) { del = false; ri = (ri + 1) % roles.length; } }
+    else { ci++; if (ci >= roles[ri].length) { del = true; setTimeout(tick, 2200); el.textContent = roles[ri]; return; } }
+    el.textContent = (del ? r : roles[ri]).slice(0, ci);
+    setTimeout(tick, del ? 35 : 70);
+  }
+  if (!reduce) setTimeout(tick, 2500);
+
+  // capability graph
+  var domains = [
+    { k: 'Platform', caps: ['Prime Finance Portal', 'Stock Loan / Securities Lending', 'Wire Transfer', 'Trade Settlement', 'Asset Servicing & Corporate Actions', 'Margin, Reference & Market Data'] },
+    { k: 'Backend',  caps: ['Java & Spring Boot', 'Microservices & REST', 'Kafka & ActiveMQ', 'Python', 'SQL Server & MongoDB', 'Event-driven architecture'] },
+    { k: 'Frontend', caps: ['Angular & TypeScript', 'React', 'Node.js', 'HTML5 / UX for clients', 'Cypress, Jest, Karma, Jasmine', 'Portal analytics'] },
+    { k: 'Cloud',    caps: ['AWS S3 / EC2 / Lambda / APIG', 'OpenShift & ECS', 'Jenkins & uDeploy CI/CD', 'ELK & CyberArk', 'Lightspeed migrations', 'Cloud migration leadership'] },
+    { k: 'AI',       caps: ['Agentic PR review (Delphyne)', 'Document intelligence (Stylus)', 'Devin AI delegation', 'Citi Squad', 'AI test generation', 'Legacy modernization with AI'] }
+  ];
+  var svgNodes = document.getElementById('nodes'), svgEdges = document.getElementById('edges');
+  var chips = document.getElementById('chips'), caps = document.getElementById('caps');
+  var NS = 'http://www.w3.org/2000/svg';
+  var cx = 320, cy = 210, R = 150, r = 95;
+  var centers = domains.map(function (d, i) {
+    var a = -Math.PI / 2 + i * (2 * Math.PI / domains.length);
+    return { x: cx + R * Math.cos(a), y: cy + R * Math.sin(a) };
+  });
+  function mk(tag, attrs) { var e = document.createElementNS(NS, tag); for (var k in attrs) e.setAttribute(k, attrs[k]); return e; }
+
+  // hub
+  svgNodes.appendChild(mk('circle', { cx: cx, cy: cy, r: 22, fill: '#151D33', stroke: '#4CC9F0', 'stroke-width': 1.5 }));
+  var hubT = mk('text', { x: cx, y: cy + 4, 'text-anchor': 'middle', fill: '#4CC9F0', 'font-family': 'JetBrains Mono, monospace', 'font-size': '11' }); hubT.textContent = 'AKC'; svgNodes.appendChild(hubT);
+
+  domains.forEach(function (d, i) {
+    var c = centers[i];
+    svgEdges.appendChild(mk('line', { x1: cx, y1: cy, x2: c.x, y2: c.y, class: 'edge', 'data-d': i }));
+    var g = mk('g', { class: 'node', 'data-d': i });
+    g.appendChild(mk('circle', { cx: c.x, cy: c.y, r: 16, fill: '#10172A', stroke: '#7B61FF', 'stroke-width': 1.5 }));
+    var t = mk('text', { x: c.x, y: c.y + 30, 'text-anchor': 'middle', fill: '#E6EBF5', 'font-family': 'Space Grotesk, sans-serif', 'font-size': '12', 'font-weight': '600' });
+    t.textContent = d.k; g.appendChild(t);
+    // satellites
+    d.caps.forEach(function (cap, j) {
+      var a = Math.atan2(c.y - cy, c.x - cx) + (j - 2.5) * 0.28;
+      var sx = c.x + r * 0.5 * Math.cos(a), sy = c.y + r * 0.5 * Math.sin(a);
+      svgEdges.appendChild(mk('line', { x1: c.x, y1: c.y, x2: sx, y2: sy, class: 'edge', 'data-d': i }));
+      var s = mk('circle', { cx: sx, cy: sy, r: 4, fill: '#4CC9F0', class: 'node', 'data-d': i });
+      var title = mk('title', {}); title.textContent = cap; s.appendChild(title);
+      svgNodes.appendChild(s);
+    });
+    svgNodes.appendChild(g);
+
+    var chip = document.createElement('button'); chip.className = 'chip'; chip.textContent = d.k + ' (' + d.caps.length + ')'; chip.dataset.d = i;
+    chips.appendChild(chip);
+    d.caps.forEach(function (cap) { var li = document.createElement('li'); li.textContent = cap; li.dataset.d = i; caps.appendChild(li); });
+  });
+
+  var active = null;
+  function setActive(i) {
+    active = (active === i) ? null : i;
+    document.querySelectorAll('[data-d]').forEach(function (n) {
+      var on = active === null || n.dataset.d == active;
+      n.classList.toggle('dim', !on);
+      if (n.classList.contains('chip')) n.classList.toggle('on', active !== null && n.dataset.d == active);
+    });
+  }
+  function hover(i, on) {
+    if (active !== null) return;
+    document.querySelectorAll('[data-d]').forEach(function (n) { n.classList.toggle('dim', on && n.dataset.d != i); });
+  }
+  chips.addEventListener('click', function (e) { if (e.target.dataset.d !== undefined) setActive(+e.target.dataset.d); });
+  svgNodes.addEventListener('click', function (e) { var n = e.target.closest('[data-d]'); if (n) setActive(+n.dataset.d); });
+  svgNodes.addEventListener('mouseover', function (e) { var n = e.target.closest('[data-d]'); if (n) hover(+n.dataset.d, true); });
+  svgNodes.addEventListener('mouseout', function () { hover(null, false); });
+})();
+</script>
+</body>
+</html>
