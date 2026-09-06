@@ -2,6 +2,14 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<script>
+(function () {
+  try {
+    var t = localStorage.getItem('akc-theme');
+    if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t);
+  } catch (e) {}
+})();
+</script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Anil Kumar Cherukuri · Platform Lead · Prime Finance Engineering</title>
 <meta name="description" content="Anil Kumar Cherukuri — Platform Lead at Citi. 16+ years building prime finance, securities lending and post-trade platforms with Java, Angular, AWS and agentic AI tooling.">
@@ -13,10 +21,12 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
+    /* dark (default) */
     --bg: #070A12;
     --bg-2: #0D1220;
     --panel: #10172A;
     --panel-2: #151D33;
+    --panel-tint: rgba(16,23,42,.6);
     --line: #1F2A44;
     --line-2: #2A3859;
     --text: #E6EBF5;
@@ -25,9 +35,56 @@
     --accent: #4CC9F0;
     --accent-2: #7B61FF;
     --accent-3: #34D399;
+    --nav-bg: rgba(7,10,18,.72);
+    --grid-line: rgba(255,255,255,.025);
+    --glow-1: rgba(76,201,240,.12);
+    --glow-2: rgba(123,97,255,.12);
     --sans: "Space Grotesk", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
     --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
     --max: 1200px;
+    color-scheme: dark;
+  }
+  :root[data-theme="light"] {
+    --bg: #F7F9FC;
+    --bg-2: #EEF2F9;
+    --panel: #FFFFFF;
+    --panel-2: #F1F4FA;
+    --panel-tint: rgba(225,232,246,.7);
+    --line: #E2E8F3;
+    --line-2: #CBD5E8;
+    --text: #101828;
+    --text-2: #46506B;
+    --muted: #7C87A0;
+    --accent: #0B84AE;
+    --accent-2: #6D28D9;
+    --accent-3: #059669;
+    --nav-bg: rgba(247,249,252,.78);
+    --grid-line: rgba(10,16,32,.045);
+    --glow-1: rgba(11,132,174,.10);
+    --glow-2: rgba(109,40,217,.08);
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: light) {
+    :root:not([data-theme="dark"]) {
+      --bg: #F7F9FC;
+      --bg-2: #EEF2F9;
+      --panel: #FFFFFF;
+      --panel-2: #F1F4FA;
+      --panel-tint: rgba(225,232,246,.7);
+      --line: #E2E8F3;
+      --line-2: #CBD5E8;
+      --text: #101828;
+      --text-2: #46506B;
+      --muted: #7C87A0;
+      --accent: #0B84AE;
+      --accent-2: #6D28D9;
+      --accent-3: #059669;
+      --nav-bg: rgba(247,249,252,.78);
+      --grid-line: rgba(10,16,32,.045);
+      --glow-1: rgba(11,132,174,.10);
+      --glow-2: rgba(109,40,217,.08);
+      color-scheme: light;
+    }
   }
   * { box-sizing: border-box; }
   html { scroll-behavior: smooth; }
@@ -44,13 +101,14 @@
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
+    transition: background .2s, color .2s;
   }
   body::before {
     content: "";
     position: fixed; inset: 0;
     background:
-      radial-gradient(900px 500px at 15% -10%, rgba(76,201,240,.12), transparent 60%),
-      radial-gradient(800px 500px at 90% 10%, rgba(123,97,255,.12), transparent 60%);
+      radial-gradient(900px 500px at 15% -10%, var(--glow-1), transparent 60%),
+      radial-gradient(800px 500px at 90% 10%, var(--glow-2), transparent 60%);
     pointer-events: none;
     z-index: 0;
   }
@@ -58,8 +116,8 @@
     content: "";
     position: fixed; inset: 0;
     background-image:
-      linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+      linear-gradient(var(--grid-line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
     background-size: 48px 48px;
     mask-image: radial-gradient(ellipse at 50% 0%, #000 20%, transparent 70%);
     pointer-events: none;
@@ -80,18 +138,26 @@
   .nav {
     position: sticky; top: 0; z-index: 20;
     backdrop-filter: blur(14px);
-    background: rgba(7,10,18,.72);
+    background: var(--nav-bg);
     border-bottom: 1px solid var(--line);
   }
-  .nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+  .nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 64px; gap: 16px; }
   .logo { font-family: var(--mono); font-weight: 500; font-size: 18px; letter-spacing: .04em; }
   .logo span { color: var(--accent); }
-  .links { display: flex; gap: 28px; font-size: 14px; color: var(--text-2); }
+  .links { display: flex; align-items: center; gap: 28px; font-size: 14px; color: var(--text-2); }
   .links a:hover { color: var(--text); }
   .links .cta {
     color: var(--bg); background: var(--accent); padding: 7px 14px; border-radius: 6px; font-weight: 600;
   }
   .links .cta:hover { color: var(--bg); filter: brightness(1.1); }
+  .theme-toggle {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-family: var(--mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase;
+    color: var(--text-2); background: transparent; border: 1px solid var(--line-2); border-radius: 999px;
+    padding: 6px 12px; cursor: pointer; transition: border-color .15s, color .15s;
+  }
+  .theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
+  .theme-toggle svg { width: 13px; height: 13px; display: block; }
   .burger { display: none; background: none; border: 1px solid var(--line-2); color: var(--text); border-radius: 6px; padding: 6px 10px; font-family: var(--mono); font-size: 12px; cursor: pointer; }
 
   /* ---------- hero ---------- */
@@ -105,7 +171,12 @@
     display: grid; place-items: center;
     position: relative; overflow: hidden;
   }
-  .avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .avatar img {
+    width: 100%; height: 100%; object-fit: cover; display: block;
+    filter: grayscale(20%) contrast(1.04) saturate(1.05);
+    -webkit-mask-image: radial-gradient(circle at 50% 42%, #000 58%, transparent 82%);
+    mask-image: radial-gradient(circle at 50% 42%, #000 58%, transparent 82%);
+  }
   .avatar .initials {
     font-family: var(--mono); font-size: 80px; font-weight: 500; letter-spacing: -.04em;
     background: linear-gradient(120deg, var(--accent), var(--accent-2));
@@ -120,7 +191,7 @@
   .hero .sub { color: var(--text-2); font-size: 18px; margin: 0 0 30px; }
   .hero .sub b { color: var(--text); font-weight: 500; }
   .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 30px; }
-  .stat { border: 1px solid var(--line); background: rgba(16,23,42,.6); border-radius: 12px; padding: 14px 16px; }
+  .stat { border: 1px solid var(--line); background: var(--panel-tint); border-radius: 12px; padding: 14px 16px; }
   .stat .n { font-family: var(--mono); font-size: 28px; font-weight: 500; color: var(--text); line-height: 1.1; }
   .stat .n em { font-style: normal; color: var(--accent); }
   .stat .l { font-size: 12px; color: var(--muted); margin-top: 4px; }
@@ -163,7 +234,7 @@
   .graph-box { background: var(--panel); border: 1px solid var(--line); border-radius: 16px; padding: 18px; }
   .graph-box svg { width: 100%; height: auto; display: block; }
   .graph-meta { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 22px; }
-  .graph-meta div { border: 1px solid var(--line); border-radius: 12px; padding: 14px; background: rgba(16,23,42,.6); }
+  .graph-meta div { border: 1px solid var(--line); border-radius: 12px; padding: 14px; background: var(--panel-tint); }
   .graph-meta .n { font-family: var(--mono); font-size: 26px; color: var(--accent); }
   .graph-meta .l { font-family: var(--mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
   .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
@@ -194,21 +265,23 @@
 
   /* modules */
   .modules { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
-  .mod { background: var(--bg-2); border: 1px solid var(--line); border-radius: 14px; padding: 20px; min-height: 170px; display: flex; flex-direction: column; transition: border-color .2s; }
-  .mod:hover { border-color: var(--accent); }
+  .mod { background: var(--bg-2); border: 1px solid var(--line); border-radius: 14px; padding: 20px; min-height: 170px; display: flex; flex-direction: column; transition: border-color .2s, transform .2s; }
+  .mod:hover { border-color: var(--accent); transform: translateY(-3px); }
   .mod .k { font-family: var(--mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
   .mod h4 { margin: 10px 0 6px; font-size: 18px; line-height: 1.2; }
   .mod p { margin: 0; color: var(--text-2); font-size: 14px; }
   .mod .sym { margin-top: auto; padding-top: 14px; color: var(--accent-2); font-family: var(--mono); font-size: 18px; }
 
   /* contact */
-  .contact-box { background: linear-gradient(135deg, rgba(76,201,240,.10), rgba(123,97,255,.10)); border: 1px solid var(--line-2); border-radius: 20px; padding: 44px; display: grid; grid-template-columns: 1.2fr 1fr; gap: 32px; align-items: center; }
+  .contact-box { background: linear-gradient(135deg, var(--glow-1), var(--glow-2)); border: 1px solid var(--line-2); border-radius: 20px; padding: 44px; display: grid; grid-template-columns: 1.2fr 1fr; gap: 32px; align-items: center; }
   .contact-box h2 { margin: 10px 0 10px; font-size: clamp(28px, 3.4vw, 40px); letter-spacing: -.02em; }
   .contact-box p { margin: 0; color: var(--text-2); }
   .contact-list { display: grid; gap: 10px; font-family: var(--mono); font-size: 14px; }
-  .contact-list a { display: flex; justify-content: space-between; gap: 12px; padding: 12px 14px; border: 1px solid var(--line-2); border-radius: 10px; background: rgba(7,10,18,.5); }
+  .contact-list a { display: flex; align-items: center; gap: 12px; justify-content: flex-start; padding: 12px 14px; border: 1px solid var(--line-2); border-radius: 10px; background: var(--panel-tint); }
   .contact-list a:hover { border-color: var(--accent); }
-  .contact-list a span:last-child { color: var(--muted); }
+  .contact-list a svg { width: 16px; height: 16px; flex: none; color: var(--accent); }
+  .contact-list a span:first-of-type { min-width: 64px; }
+  .contact-list a span:last-child { color: var(--muted); margin-left: auto; }
 
   /* footer */
   footer { border-top: 1px solid var(--line); padding: 56px 0 40px; color: var(--text-2); font-size: 14px; }
@@ -216,6 +289,14 @@
   .fgrid h5 { margin: 0 0 12px; color: var(--text); font-size: 14px; font-weight: 600; }
   .fgrid ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
   .fgrid a:hover { color: var(--accent); }
+  .fsocial { display: flex; gap: 10px; margin-top: 16px; }
+  .fsocial a {
+    display: grid; place-items: center; width: 34px; height: 34px;
+    border: 1px solid var(--line-2); border-radius: 8px; color: var(--text-2);
+    transition: border-color .15s, color .15s;
+  }
+  .fsocial a:hover { border-color: var(--accent); color: var(--accent); }
+  .fsocial a svg { width: 16px; height: 16px; }
   .fbottom { margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--line); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; font-family: var(--mono); font-size: 12px; color: var(--muted); }
 
   /* ---------- responsive ---------- */
@@ -227,10 +308,11 @@
     .fgrid { grid-template-columns: 1fr 1fr; }
   }
   @media (max-width: 700px) {
-    .links { display: none; position: absolute; top: 64px; left: 0; right: 0; flex-direction: column; gap: 0; background: var(--bg-2); border-bottom: 1px solid var(--line); padding: 8px 28px 16px; }
+    .links { display: none; position: absolute; top: 64px; left: 0; right: 0; flex-direction: column; align-items: flex-start; gap: 0; background: var(--bg-2); border-bottom: 1px solid var(--line); padding: 8px 28px 16px; }
     .links.open { display: flex; }
     .links a { padding: 10px 0; }
     .links .cta { align-self: flex-start; margin-top: 8px; }
+    .links .theme-toggle { margin: 8px 0 4px; }
     .burger { display: block; }
     .hero { padding: 56px 0 48px; }
     .stats { grid-template-columns: 1fr 1fr; }
@@ -254,6 +336,10 @@
       <a href="#graph">Capability Graph</a>
       <a href="#experience">Experience</a>
       <a href="#credentials">Credentials</a>
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle color theme">
+        <svg id="themeIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg>
+        <span id="themeLabel">Auto</span>
+      </button>
       <a class="cta" href="#contact">Contact</a>
     </nav>
   </div>
@@ -457,9 +543,18 @@
           <p>Open to conversations about platform leadership, capital-markets architecture and applying agentic AI in regulated environments.</p>
         </div>
         <div class="contact-list">
-          <a href="https://www.linkedin.com/in/anil-cherukuri-78191a22b/" target="_blank" rel="noopener"><span>LinkedIn</span><span>/in/anil-cherukuri-78191a22b</span></a>
-          <a href="mailto:anil.cherukuri@citi.com"><span>Email</span><span>anil.cherukuri@citi.com</span></a>
-          <a href="tel:+17328812199"><span>Phone</span><span>732-881-2199</span></a>
+          <a href="https://www.linkedin.com/in/anil-cherukuri-78191a22b/" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.38-1.85 3.61 0 4.28 2.38 4.28 5.47zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56z"></path></svg>
+            <span>LinkedIn</span><span>/in/anil-cherukuri-78191a22b</span>
+          </a>
+          <a href="mailto:anil.cherukuri@citi.com">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="m22 6-10 7L2 6"></path></svg>
+            <span>Email</span><span>anil.cherukuri@citi.com</span>
+          </a>
+          <a href="tel:+17328812199">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+            <span>Phone</span><span>732-881-2199</span>
+          </a>
         </div>
       </div>
     </div>
@@ -472,6 +567,17 @@
       <div>
         <div class="logo">AKC<span>_</span></div>
         <p style="margin:12px 0 0;max-width:40ch">Platform Lead at Citi. Prime finance, securities lending and post-trade platforms built on Java, Angular, AWS and agentic AI tooling.</p>
+        <div class="fsocial">
+          <a href="https://www.linkedin.com/in/anil-cherukuri-78191a22b/" target="_blank" rel="noopener" aria-label="LinkedIn">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.38-1.85 3.61 0 4.28 2.38 4.28 5.47zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56z"></path></svg>
+          </a>
+          <a href="mailto:anil.cherukuri@citi.com" aria-label="Email">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="m22 6-10 7L2 6"></path></svg>
+          </a>
+          <a href="tel:+17328812199" aria-label="Phone">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+          </a>
+        </div>
       </div>
       <div>
         <h5>Navigate</h5>
@@ -504,6 +610,26 @@
     burger.setAttribute('aria-expanded', open);
   });
   links.addEventListener('click', function (e) { if (e.target.tagName === 'A') links.classList.remove('open'); });
+
+  // theme toggle: auto -> light -> dark -> auto
+  var root = document.documentElement;
+  var themeBtn = document.getElementById('themeToggle');
+  var themeLabel = document.getElementById('themeLabel');
+  function currentTheme() {
+    try { return localStorage.getItem('akc-theme') || 'auto'; } catch (e) { return 'auto'; }
+  }
+  function applyTheme(t) {
+    if (t === 'auto') root.removeAttribute('data-theme');
+    else root.setAttribute('data-theme', t);
+    themeLabel.textContent = t.charAt(0).toUpperCase() + t.slice(1);
+  }
+  applyTheme(currentTheme());
+  themeBtn.addEventListener('click', function () {
+    var order = ['auto', 'light', 'dark'];
+    var next = order[(order.indexOf(currentTheme()) + 1) % order.length];
+    try { localStorage.setItem('akc-theme', next); } catch (e) {}
+    applyTheme(next);
+  });
 
   // typewriter
   var roles = ['Platform Lead, Prime Brokerage', 'Capital Markets Engineer', 'Cloud-Native Architect', 'AI-Native Engineering Leader'];
